@@ -1,0 +1,53 @@
+% Facts: individuals with their names and DOBs
+dob(john, date(1990, 5, 15)).
+dob(susan, date(1985, 8, 22)).
+dob(mike, date(1982, 12, 10)).
+dob(emma, date(1995, 3, 7)).
+dob(chris, date(1978, 9, 30)).
+
+% Rule: retrieve the DOB of a specific person given their name
+get_dob(Name, DOB) :-
+    dob(Name, DOB).
+
+% Rule: calculate age based on DOB
+age(Name, Age) :-
+    dob(Name, date(Year, Month, Day)),
+    date(YearNow, MonthNow, DayNow),
+    Age is YearNow - Year - ((MonthNow, DayNow) @< (Month, Day)).
+
+% Rule: find all individuals who are older than a certain age
+older_than(AgeLimit, Name) :-
+    dob(Name, DOB),
+    age(Name, Age),
+    Age > AgeLimit.
+
+% Rule: determine who is the youngest person in the database
+youngest(Name, DOB) :-
+    dob(Name, DOB),
+    \+ (dob(_, OtherDOB), OtherDOB @< DOB).
+
+% Rule: check if a specific person is older than another specific person
+older_than_other(Person1, Person2) :-
+    dob(Person1, DOB1),
+    dob(Person2, DOB2),
+    DOB1 @< DOB2.
+
+output
+
+% Retrieve the DOB of a specific person given their name
+?- get_dob(john, DOB).
+% Output: DOB = date(1990, 5, 15).
+
+% Find all individuals who are older than a certain age (e.g., 30 years old)
+?- older_than(30, Name).
+% Output: Name = susan ;
+%         Name = mike ;
+%         Name = chris.
+
+% Determine who is the youngest person in the database
+?- youngest(Name, DOB).
+% Output: Name = emma, DOB = date(1995, 3, 7).
+
+% Check if a specific person is older than another specific person
+?- older_than_other(john, susan).
+% Output: false.
