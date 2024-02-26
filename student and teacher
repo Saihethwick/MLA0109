@@ -1,5 +1,37 @@
-takes(jane_doe, his201).
-takes(jane_doe, cs245).
-takes(ajit_chandra, art302).
-takes(ajit_chandra, cs254).
-classmates(X, Y) :- takes(X, Z), takes(Y, Z).
+student(john).
+student(jane).
+student(jim).
+
+teacher(mrs_smith).
+teacher(mr_jones).
+
+subject(math).
+subject(science).
+subject(english).
+
+code(math, M101).
+code(science, S202).
+code(english, E303).
+
+teaches(mrs_smith, math).
+teaches(mr_jones, science).
+teaches(mr_jones, english).
+
+% Rules
+question(Who, Fills, Blank) :-
+    student(Who),
+    Blank = [The, Subject, Taught, By, Teacher],
+    teaches(Teacher, Subject),
+    code(Subject, Code),
+    format('Who is the teacher of ~w (~c)?', [Code, Subject]),
+    format('~n', []),
+    format('?- student(X), teaches(T, S), code(S, ~c), X = ~w.', [Code, Subject, Who]).
+
+run :-
+    findall(Q, question(Who, Fills, Blank), Questions),
+    maplist(print_question, Questions).
+
+print_question(Q) :-
+    write('Question: '),
+    writeln(Q),
+    nl.
