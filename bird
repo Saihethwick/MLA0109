@@ -1,14 +1,18 @@
+% Facts about birds and whether they can fly
 bird(sparrow).
 bird(eagle).
-bird(duck).
 bird(crow).
-bird(ostrich).
-bird(puffin).
-bird(swan).
-bird(albatross).
-bird(starling).
-bird(owl).
-bird(kingfisher).
-bird(thrush).
-can_fly(X):-bird(X).
-can_fly(ostrich):-fail.
+can_fly(sparrow).
+can_fly(eagle).
+
+% Query to determine if a bird can fly
+can_fly_bird(Bird) :-
+    bird(Bird),
+    can_fly(Bird).
+
+% Query for the provided birds
+?- can_fly_bird(sparrow).
+?- can_fly_bird(penguin).
+?- can_fly_bird(eagle).
+?- can_fly_bird(crow).
+
