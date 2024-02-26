@@ -1,0 +1,21 @@
+% Facts about dietary recommendations for different diseases
+dietary_recommendation(diabetes, 'Eat plenty of fruits, vegetables, and whole grains. Limit intake of saturated fats, sugar, and refined carbohydrates. Monitor carbohydrate intake and choose low-glycemic index foods.').
+dietary_recommendation(hypertension, 'Eat plenty of fruits, vegetables, and whole grains. Limit sodium intake, processed foods, and high-sodium condiments. Choose low-fat dairy products and lean protein sources.').
+dietary_recommendation(obesity, 'Eat a balanced diet with plenty of fruits, vegetables, and whole grains. Limit portion sizes and high-calorie foods. Increase physical activity and avoid sedentary behavior.').
+
+% Predicate to suggest a dieting system based on a specific disease
+suggest_diet(Disease, Recommendation) :-
+    dietary_recommendation(Disease, Recommendation).
+
+% Example queries
+% Suggest a dieting system for diabetes
+% ?- suggest_diet(diabetes, Recommendation).
+% Recommendation = 'Eat plenty of fruits, vegetables, and whole grains. Limit intake of saturated fats, sugar, and refined carbohydrates. Monitor carbohydrate intake and choose low-glycemic index foods.'.
+
+% Suggest a dieting system for hypertension
+% ?- suggest_diet(hypertension, Recommendation).
+% Recommendation = 'Eat plenty of fruits, vegetables, and whole grains. Limit sodium intake, processed foods, and high-sodium condiments. Choose low-fat dairy products and lean protein sources.'.
+
+% Suggest a dieting system for obesity
+% ?- suggest_diet(obesity, Recommendation).
+% Recommendation = 'Eat a balanced diet with plenty of fruits, vegetables, and whole grains. Limit portion sizes and high-calorie foods. Increase physical activity and avoid sedentary behavior.'.
